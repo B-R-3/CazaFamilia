@@ -16,9 +16,9 @@
     </div>
     <div class="container">
         <div class="log">
-            <div class="one"><a href="Liste.php">connexion</a></div>
+            <div class="one"><a href="Connexion.php">connexion</a></div>
             <div class="sep"></div>
-            <div class="one"><a href="Liste.php">inscription</a></div>
+            <div class="one"><a href="inscription.php">inscription</a></div>
         </div>
     </div>
 
