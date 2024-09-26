@@ -1,0 +1,7 @@
+_user = (id_user COUNTER, login VARCHAR(255), password VARCHAR(255), email VARCHAR(255));
+
+commande = (id_commande COUNTER, id_etat INT, _date DATE, total_commande DECIMAL(10,2), type_conso INT, #id_user);
+
+produit = (id_produit COUNTER, libelle VARCHAR(255), prix_ht DECIMAL(10,2));
+
+ligne_comande = (id_igne_commande COUNTER, qte INT, total_ligne_ht DECIMAL(10,2), #id_produit, #id_commande);
