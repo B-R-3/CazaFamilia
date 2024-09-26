@@ -7,14 +7,11 @@
 </head>
 <body>
 <header Connexion>
-        <h1 >AppFaq</h1>
+        <h1 >CazaFamilia</h1>
         <h2>Connexion</h2>
-        <nav>
-            <ul>
-                <li ><a href="index.php" >Accueil</a></li>
-                <li ><a href="Enregistrer.php">S'inscrire</a></li>
-            </ul>
-        </nav>
+        <?php
+        include "menu.php"
+        ?>
     </header>
   
     <form action="Connexion.php" method="post">
@@ -31,7 +28,7 @@
     </form>
 
 
-    <p >Copyright 2024 - CasaFamillia | BTS SIO | Adrien CACHOUX - Romain CANER - Baptiste FOUCHARD - Brandon MOLINA-SERNA</p>
+    <p>Copyright 2024 -  CazaFamilia  | BTS SIO | Adrien CACHOUX - Romain CANER - Baptiste FOUCHARD - Brandon MOLINA-SERNA</p>
    
 </body>
 </html>
