@@ -1,0 +1,64 @@
+body {
+    text-align: center;
+   
+}
+.fond_accueil{
+    width: 100%;
+    height: 75vh;
+    background-image: url(image/logo.jpg);
+    background-repeat:no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.titre {
+    width: 50%;
+    height: 25vh;
+    background-color:antiquewhite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    justify-content:center;
+}
+.log {
+    width: 25%;
+    height: 10vh;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+}
+.one{
+    width: 50%;
+    height: 15vh;
+    background-color: bisque;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sep{
+    width: 10px;
+}
+
+table, th, td {
+    border-style: solid;
+    border-width: 2px;
+    border-color : rgb(0, 0, 0);
+    border-collapse: collapse;
+}
+    th { 
+    color: rgb(0, 0, 0); 
+}
+    td {
+    width: 100px;
+    text-align: center;
+}
+.liste{
+    display: flex;
+    justify-content: center;
+}
