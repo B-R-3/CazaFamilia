@@ -16,7 +16,7 @@
             </ul>
         </nav>
     </header>
-    <?= $message ?>
+  
     <form action="Connexion.php" method="post">
 
         <label for="Pseudo" class="login-form-label">Pseudo</label><br>
@@ -31,7 +31,7 @@
     </form>
 
 
-    <p >Copyright 2024 - CasaFamillia| BTS SIO | Adrien CACHOUX - Romain CANER - Baptiste FOUCHARD - Brandon MOLINA-SERNA</p>
+    <p >Copyright 2024 - CasaFamillia | BTS SIO | Adrien CACHOUX - Romain CANER - Baptiste FOUCHARD - Brandon MOLINA-SERNA</p>
    
 </body>
 </html>
