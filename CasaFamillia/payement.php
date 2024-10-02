@@ -50,6 +50,7 @@
     </style>
 </head>
 <body>
+<a href="index.php"><button>Retour à l'accueil</button></a>
     <div class="container">
         <h2>Page de Paiement</h2>
         <form action="traitement_paiement.php" method="POST">
@@ -73,5 +74,6 @@
             <input type="submit" value="Payer">
         </form>
     </div>
+    <a href="confirmation.php"><button>test de confirmation</button></a>
 </body>
 </html>
