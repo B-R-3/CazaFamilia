@@ -1,29 +1,35 @@
-body {
-    text-align: center;
-   
+*{
+    margin: 0;
+    padding: 0;
 }
-.fond_accueil{
+h1{
+    text-align: center;
+}
+.fond_accueil {
     width: 100%;
     height: 75vh;
     background-image: url(image/logo.jpg);
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .titre {
     width: 50%;
     height: 25vh;
-    background-color:antiquewhite;
+    background-color: antiquewhite;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.container{
+
+.container {
     display: flex;
-    justify-content:center;
+    justify-content: center;
 }
+
 .log {
     width: 25%;
     height: 10vh;
@@ -32,8 +38,10 @@ body {
     justify-content: space-evenly;
     align-items: center;
     flex-direction: row;
+    text-transform: uppercase;
 }
-.one{
+
+.one {
     width: 50%;
     height: 15vh;
     background-color: bisque;
@@ -41,24 +49,30 @@ body {
     justify-content: center;
     align-items: center;
 }
-.sep{
+
+.sep {
     width: 10px;
 }
 
-table, th, td {
+table,
+th,
+td {
     border-style: solid;
     border-width: 2px;
-    border-color : rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
     border-collapse: collapse;
 }
-    th { 
-    color: rgb(0, 0, 0); 
+
+th {
+    color: rgb(0, 0, 0);
 }
-    td {
+
+td {
     width: 100px;
     text-align: center;
 }
-.liste{
+
+.liste {
     display: flex;
     justify-content: center;
 }

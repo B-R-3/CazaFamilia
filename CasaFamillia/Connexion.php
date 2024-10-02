@@ -7,7 +7,7 @@
 </head>
 <body>
 <header Connexion>
-        <h1 >CazaFamilia</h1>
+        <h1>CazaFamilia</h1>
         <h2>Connexion</h2>
         <?php
         include "menu.php"
@@ -22,8 +22,7 @@
         <label for="mdp" class="login-form-label">Mot de passe</label><br>
         <input type="mdp" id="mdp" name="mdp" /><br><br>
 
-        <button type="submit" name="submit" >Ok</button><br><br>
-
+        <button type="submit" name="submit" ><a href="Liste.php">Ok</a></button>
         <button type="reset" name="Annuler">Annuler</button><br><br>
     </form>
 

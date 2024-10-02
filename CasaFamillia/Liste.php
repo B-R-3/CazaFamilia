@@ -9,7 +9,7 @@
 <body>
     <a href="index.php">Deconnexion</a>
     
-    <h1>Liste des produits disponible</h1>
+    <h1>Liste des produits disponibles</h1>
     <br>
     <br>
     
@@ -23,17 +23,17 @@
             <tr>
                 <td>prjrjnh</td>
                 <td>fgiehg</td>
-                <td><input type="text" name="nombre" value="nombre"></td>
+                <td><input type="number" name="nombre" placeholder="ex: 2"></td>
             </tr>
             <tr>
                 <td>prjrjnh</td>
                 <td>fgiehg</td>
-                <td><input type="text" name="nombre" value="nombre"></td>
+                <td><input type="number" name="nombre" placeholder="ex: 6"></td>
             </tr>
             <tr>
                 <td>prjrjnh</td>
                 <td>fgiehg</td>
-                <td><input type="text" name="nombre" value="nombre"></td>
+                <td><input type="number" name="nombre" placeholder="ex: 1"></td>
             </tr>
 
            
@@ -42,8 +42,7 @@
     <p>
             <input type="checkbox" name="Surplace" value="oui">A emporter
             <input type="checkbox" name="emporter" value="oui">Sur place <br><br>
-            <input type="button" name="valider" value="valider">
-        
+            <a href="validation.php"> <input type="button" name="valider" value="valider"></a>
     </p>
 
 </body>

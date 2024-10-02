@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>CasaFamillia</title>
+    <title>CazaFamillia</title>
 </head>
 
 <body>
@@ -20,6 +20,33 @@
             <div class="sep"></div>
             <div class="one"><a href="inscription.php">inscription</a></div>
         </div>
+    </div>
+    <br><br><br>
+    <div class="liste">
+        <table>
+            <tr>
+                <th>Plats</th>
+                <th>Prix</th>
+                <th>Quantité disponible</th>
+            </tr>
+            <tr>
+                <td>Pizza margharita</td>
+                <td>15e</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>Lasagne</td>
+                <td>12e</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>Tiramisu</td>
+                <td>5e</td>
+                <td>20</td>
+            </tr>
+
+           
+        </table>
     </div>
 
 </body>
