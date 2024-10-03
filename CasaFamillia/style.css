@@ -2,8 +2,18 @@
     margin: 0;
     padding: 0;
 }
+.italianno-regular {
+    font-family: "Italianno", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
 h1{
+    font-size: 3em;
+}
+body{
     text-align: center;
+    font-family: "Italianno";
+    font-size: 1.5em;
 }
 .fond_accueil {
     width: 100%;
