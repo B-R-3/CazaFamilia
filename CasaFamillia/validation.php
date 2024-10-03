@@ -23,17 +23,17 @@
             <tr>
                 <td>Plat 1</td>
                 <td>15€</td>
-                <td><input type="text" name="nombre" value="2"></td>
+                <td><input type="number" name="nombre" value="2"></td>
             </tr>
             <tr>
                 <td>Plat 2</td>
                 <td>10€</td>
-                <td><input type="text" name="nombre" value="1"></td>
+                <td><input type="number" name="nombre" value="1"></td>
             </tr>
             <tr>
                 <td>Plat 3</td>
                 <td>8€</td>
-                <td><input type="text" name="nombre" value="3"></td>
+                <td><input type="number" name="nombre" value="3"></td>
             </tr>
         </table>
         <p>Sur place</p>
