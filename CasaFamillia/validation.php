@@ -40,7 +40,7 @@
     </div>
     
     <p>
-    <a href="index.php"><button>Retour à l'accueil</button></a>
+    <a href="payement.php"><button>Payer</button></a>
         <a href="liste.php"><input type="button" name="valider" value="Mofifier"></a>
     </p>
 
