@@ -1,3 +1,22 @@
+<?php
+include "fonction.inc.php";
+session_start();
+
+$dbh = connexion();
+
+$sql1 = 'select * from produit';
+try {
+    $sth = $dbh->prepare($sql1);
+    $sth->execute(array(
+    ));
+    $rows = $sth->fetchALL(PDO::FETCH_ASSOC);
+} catch (PDOException $ex) {
+    die("Erreur lors de la requête SQL : " . $ex->getMessage());
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -26,8 +45,20 @@
     </div>
     <br><br><br>
     <div class="liste">
+        
         <table>
-            <tr>
+        <tr>
+                <th>Plats</th>
+                <th>Prix</th>
+            </tr>
+        <?php
+        foreach ($rows as $row){
+            echo "<tr><td>".$row["libelle"]."</td>";
+            echo "<td>".$row["prix_ht"]."€</td></tr>";
+            ;
+
+        }
+           /*<tr>
                 <th>Plats</th>
                 <th>Prix</th>
                 <th>Quantité disponible</th>
@@ -46,9 +77,9 @@
                 <td>Tiramisu</td>
                 <td>5e</td>
                 <td>20</td>
-            </tr>
 
-
+            </tr>*/
+           ?>
         </table>
     </div>
 
