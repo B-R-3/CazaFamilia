@@ -2,10 +2,10 @@
 include "fonction.inc.php";
 session_start();
 
-if (!isset($_SESSION['user'])) {
+/*if (!isset($_SESSION['user'])) {
     header("Location: index.php");
     exit();
-}
+}*/
 
 // Connexion à la base de données
 $dbh = connexion();
@@ -98,7 +98,7 @@ if (isset($_POST['annuler'])) {
             foreach ($rows as $row) {
                 echo '<tr><td>' . htmlspecialchars($row["libelle"]) . '</td>';
                 echo '<td>' . htmlspecialchars($row["prix_ht"]) . '€</td>';
-                echo '<td><input type="number" name="quantite[' . $row["id"] . ']" min="0" max="20" placeholder="0"></td></tr>';
+                echo '<td><input type="number" name="quantite[' . $row["id_produit"] . ']" min="0" max="20" placeholder="0"></td></tr>';
             }
             ?>
         </table>
