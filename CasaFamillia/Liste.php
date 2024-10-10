@@ -6,7 +6,6 @@ session_start();
 // Connexion à la base de données
 $dbh = connexion();
 
-print_r($_SESSION);
 $type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
 $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
 $qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
