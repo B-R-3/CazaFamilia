@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 26 sep. 2024 à 10:47
+-- Généré le : jeu. 10 oct. 2024 à 08:45
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -38,6 +38,13 @@ CREATE TABLE `commande` (
   `type_conso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id_commande`, `id_user`, `id_etat`, `_date`, `total_commande`, `type_conso`) VALUES
+(1, 1, 1, '2024-10-03 11:36:27', 14.00, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -61,8 +68,30 @@ CREATE TABLE `lignecommande` (
 CREATE TABLE `produit` (
   `id_produit` int(11) NOT NULL,
   `libelle` varchar(255) NOT NULL,
-  `prix_ht` decimal(10,2) NOT NULL
+  `prix_ht` decimal(10,2) NOT NULL,
+  `quantité_produit` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `produit`
+--
+
+INSERT INTO `produit` (`id_produit`, `libelle`, `prix_ht`, `quantité_produit`) VALUES
+(1, 'Tomate Mozzarella Basilic ', 10.00, 15),
+(2, 'Carpaccio de bresaola au pesto', 12.00, 15),
+(3, 'Bruschetta Tomate Jambon', 12.00, 17),
+(4, 'Wrap à l\'italienne', 8.00, 18),
+(5, 'Lasagnes bolognaise', 15.00, 20),
+(6, 'Cannelloni fromage/bolognaise', 14.00, 25),
+(7, 'Spaghetti Bolognaise/Carbonara', 14.00, 22),
+(8, 'Pizza Margherita', 14.00, 21),
+(9, 'Pizza Calzone', 14.00, 15),
+(10, 'Pizza Truffe', 14.00, 14),
+(11, 'Pizza Sicilienne', 14.00, 11),
+(12, 'Tiramisu ', 6.00, 26),
+(13, 'Panna Cotta', 6.00, 22),
+(14, 'Café', 4.00, 50),
+(15, 'Affogato', 7.00, 28);
 
 -- --------------------------------------------------------
 
@@ -76,6 +105,13 @@ CREATE TABLE `_user` (
   `email` varchar(255) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `_user`
+--
+
+INSERT INTO `_user` (`id_user`, `login`, `email`, `mot_de_passe`) VALUES
+(1, 'admin', 'admin@gmail.com', 'admin');
 
 --
 -- Index pour les tables déchargées
@@ -118,7 +154,7 @@ ALTER TABLE `_user`
 -- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
-  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `lignecommande`
@@ -130,13 +166,13 @@ ALTER TABLE `lignecommande`
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `id_produit` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_produit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `_user`
 --
 ALTER TABLE `_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
