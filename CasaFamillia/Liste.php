@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
         }
 
         // Rediriger après insertion
-        header("Location: validation.php?id_commande=" . $id_commande . "type_conso=".$type_conso);
+        header("Location: validation.php?id_commande=" . $id_commande . "&type_conso=".$type_conso);
         exit();
     } catch (PDOException $e) {
         die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");

@@ -1,8 +1,9 @@
 <?php
 session_start();
 include "fonction.inc.php";
-print_r($_SESSION);
+echo "<pre>";
 print_r($_GET);
+echo "</pre>";
 
 // Connexion à la base de données
 $dbh = connexion();
@@ -16,19 +17,20 @@ $id_user = $_SESSION['id_user'];
 
 // Initialisation des variables
 
-$type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
+$type_conso = isset($_GET["type_conso"]) ? $_GET["type_conso"] : '0';
 $id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
+$total_commande = isset($_GET["total_commande"]) ? $_GET["total_commande"] : '';
 $qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
 $produits_commande = array(); // Initialisation à un tableau vide
 $total_commande = 0; // Initialisation à 0
-
+echo "type =".$type_conso;
 // Récupérer les produits commandés de la base de données
 // Exemple : SELECT produit, prix_ht FROM produits WHERE id_user = :id_user
 // Simulation des produits (ceci doit être remplacé par votre logique réelle)
-$sql = 'SELECT p.libelle, p.prix_ht, l.qte  FROM lignecommande as l, produit as p where l.id_produit = p.id_produit and id_commande = :id_commande';
+$sql = 'SELECT p.libelle, p.prix_ht, l.qte, c.total_commande FROM lignecommande as l, produit as p, commande as c where l.id_produit = p.id_produit and l.id_commande = c.id_commande and c.id_commande = :id_commande';
 try {
     $sth = $dbh->prepare($sql);
-    $sth->execute(
+    $sth->execute( 
         array(
             ":id_commande" => $id_commande
         )
@@ -53,7 +55,7 @@ try {
 <body>
     <h1>Récapitulatif de la commande</h1>
 
-    <h2>Type de consommation : <?php echo htmlspecialchars($type_conso); ?></h2>
+    <h2>Type de consommation : <?php echo $type_conso; ?></h2>
     <p>Date de la commande : <?php echo date("Y-m-d H:i:s"); ?></p>
 
     <table border="1">
@@ -68,13 +70,12 @@ try {
                 <td><?php echo htmlspecialchars($row['libelle']); ?></td>
                 <td><?php echo number_format($row['prix_ht'], 2); ?> €</td>
                 <td><?php echo htmlspecialchars($row['qte']); ?></td>
-                <!-- <td><?php //echo htmlspecialchars($row['prix']); 
-                            ?></td> -->
+                <td><?php echo htmlspecialchars($row['total_commande']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
 
-    <h3>Total de la commande (HT) : <?php echo number_format($total_commande, 2); ?> €</h3>
+    <h3>Total de la commande (HT) : <?php echo number_format($row['total_commande'], 2); ?> €</h3>
 
     <p><a href="index.php">Retour à l'accueil</a></p>
 </body>
