@@ -2,10 +2,6 @@
 include "fonction.inc.php";
 session_start();
 
-/*if (!isset($_SESSION['user'])) {
-    header("Location: index.php");
-    exit();
-}*/
 
 // Connexion à la base de données
 $dbh = connexion();
@@ -13,7 +9,7 @@ $dbh = connexion();
 print_r($_SESSION);
 $type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
 $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
-$quantities = isset($_POST['quantite']) ? $_POST['quantite'] : array(); // Capture les quantités
+$qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
 
 $sql = 'SELECT * FROM produit';
 try {
@@ -25,13 +21,21 @@ try {
 }
 
 if (isset($_POST['submit'])) {
+    // Vérification de l'existence de l'id_user dans la session
+    if (!isset($_SESSION['id_user'])) {
+        die('Utilisateur non authentifié.');
+    }
+
+    $id_user = $_SESSION['id_user']; // Récupération de l'ID utilisateur depuis la session
+
     // Insertion dans la table commande
-    $sql = "INSERT INTO commande(type_conso, _date) VALUES (:type_conso, CURRENT_TIMESTAMP())";
+    $sql = "INSERT INTO commande(type_conso, _date, id_user) VALUES (:type_conso, CURRENT_TIMESTAMP(), :id_user)";
     try {
         $sth = $dbh->prepare($sql);
         $sth->execute(
             array(
-                ":type_conso" => $type_conso
+                ":type_conso" => $type_conso,
+                ":id_user" => $id_user // Ajout de l'id_user à la requête
             )
         );
 
@@ -42,7 +46,7 @@ if (isset($_POST['submit'])) {
         $sql1 = "INSERT INTO lignecommande(qte, id_produit, id_commande) VALUES (:qte, :id_produit, :id_commande)";
         $sth = $dbh->prepare($sql1);
 
-        foreach ($quantities as $id_produit => $qte) {
+        foreach ($qte as $id_produit => $qte) {
             if ($qte > 0) { // Si la quantité est supérieure à 0
                 $sth->execute(
                     array(
@@ -62,6 +66,7 @@ if (isset($_POST['submit'])) {
         die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
     }
 }
+
 
 if (isset($_POST['annuler'])) {
     header("Location: index.php");
@@ -98,7 +103,7 @@ if (isset($_POST['annuler'])) {
             foreach ($rows as $row) {
                 echo '<tr><td>' . htmlspecialchars($row["libelle"]) . '</td>';
                 echo '<td>' . htmlspecialchars($row["prix_ht"]) . '€</td>';
-                echo '<td><input type="number" name="quantite[' . $row["id_produit"] . ']" min="0" max="20" placeholder="0"></td></tr>';
+                echo '<td><input type="number" name="qte[' . $row["id_produit"] . ']" min="0" max="20" placeholder="0"></td></tr>';
             }
             ?>
         </table>
@@ -113,6 +118,8 @@ if (isset($_POST['annuler'])) {
         <p>
             <input type="submit" name="submit" value="Valider">
             <input type="submit" name="annuler" value="Annuler">
+            <input type="hidden" name="form_submitted" value="1">
+
         </p>
     </form>
 </body>

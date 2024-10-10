@@ -1,3 +1,20 @@
+<?php
+include "fonction.inc.php";
+session_start();
+
+$dbh = connexion();
+
+$sql = 'select * lignecommande';
+try {
+    $sth = $dbh->prepare($sql);
+    $sth->execute(array(
+    ));
+    $rows = $sth->fetchALL(PDO::FETCH_ASSOC);
+} catch (PDOException $ex) {
+    die("Erreur lors de la requête SQL : " . $ex->getMessage());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

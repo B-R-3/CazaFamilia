@@ -79,7 +79,6 @@ if ($annuler) {
                     <div class="but-general">
                         <input type="submit" name="submit" value="Connexion"/>
                         <input type="submit" name="annuler" value="Annuler">
-                        <a href="Liste.php">Liste</a>
                     </div>
                 </div>
             </form>
