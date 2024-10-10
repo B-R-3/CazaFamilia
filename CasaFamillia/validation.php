@@ -1,54 +1,38 @@
 <?php
 session_start();
 include "fonction.inc.php";
+print_r($_SESSION);
+print_r($_GET);
 
 // Connexion à la base de données
 $dbh = connexion();
 
-// Vérifier si l'utilisateur est connecté et que l'id_user est défini
+// Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id_user'])) {
     die("Erreur : Utilisateur non connecté.");
 }
 
 $id_user = $_SESSION['id_user'];
 
+// Initialisation des variables
+
 $type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
 $qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
+$produits_commande = array(); // Initialisation à un tableau vide
+$total_commande = 0; // Initialisation à 0
 
-// Vérifier si le formulaire a été soumis
-/*if (!isset($_POST['form_submitted'])) {
-    die("Erreur : Accès direct interdit.");
+// Récupérer les produits commandés de la base de données
+// Exemple : SELECT produit, prix_ht FROM produits WHERE id_user = :id_user
+// Simulation des produits (ceci doit être remplacé par votre logique réelle)
+$produits_commande = [
+    ['libelle' => 'Produit A', 'prix_ht' => 10.0, 'qte' => 2, 'total' => 20.0],
+    ['libelle' => 'Produit B', 'prix_ht' => 15.0, 'qte' => 1, 'total' => 15.0],
+];
+
+// Calcul du total de la commande
+foreach ($produits_commande as $produit) {
+    $total_commande += $produit['total'];
 }
-
-// Récupération et validation du type de consommation
-$type_conso = filter_input(INPUT_POST, 'type_conso');
-$valid_types = ['emporter', 'surplace'];
-
-if (!$type_conso || !in_array($type_conso, $valid_types)) {
-    die("Erreur : Type de consommation non spécifié ou invalide.");
-}
-
-// Vérification des quantités
-$qte = isset($_POST['qte']) ? $_POST['qte'] : [];
-if (empty($qte)) {
-    die("Erreur : Aucune quantité spécifiée pour les produits.");
-}
-*/
-// Insertion de la commande dans la table commande
-$sql = "INSERT INTO commande (id_user, type_conso, _date) VALUES (:id_user, :type_conso, CURRENT_TIMESTAMP())";
-try {
-    $sth = $dbh->prepare($sql);
-    $sth->execute([
-        ':id_user' => $id_user,
-        ':type_conso' => $type_conso
-    ]);
-    $id_commande = $dbh->lastInsertId();
-} catch (PDOException $e) {
-    die("Erreur lors de l'insertion de la commande : " . $e->getMessage());
-}
-
-// Le reste du code reste inchangé...
-echo "baba au rhum";
 ?>
 
 <!DOCTYPE html>

@@ -39,8 +39,8 @@ if (isset($_POST['submit'])) {
             )
         );
 
-        // Récupérer l'ID de la commande insérée
-        $id_commande = $dbh->lastInsertId();
+        // récupérer l'ID de la dernière ligne insérée dans une table de la base de données.
+        $id_commande = $dbh->lastInsertId(); 
 
         // Insertion dans la table lignecommande pour chaque produit commandé
         $sql1 = "INSERT INTO lignecommande(qte, id_produit, id_commande) VALUES (:qte, :id_produit, :id_commande)";
@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
         }
 
         // Rediriger après insertion
-        header("Location: validation.php");
+        header("Location: validation.php?id_commande=".$id_commande);
         exit();
 
     } catch (PDOException $e) {
@@ -110,15 +110,15 @@ if (isset($_POST['annuler'])) {
 
         <!-- Boutons radio pour le type de consommation -->
         <p>
-            <input type="radio" name="type_conso" value="emporter" required> À emporter
-            <input type="radio" name="type_conso" value="surplace" required> Sur place
+            <input type="radio" name="type_conso" value="1" required> À emporter
+            <input type="radio" name="type_conso" value="0" required> Sur place
         </p>
 
         <!-- Boutons de soumission -->
         <p>
             <input type="submit" name="submit" value="Valider">
             <input type="submit" name="annuler" value="Annuler">
-            <input type="hidden" name="form_submitted" value="1">
+         <!-- <input type="hidden" name="form_submitted" value="1"> -->
 
         </p>
     </form>
