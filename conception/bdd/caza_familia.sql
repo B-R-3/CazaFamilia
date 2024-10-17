@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 17 oct. 2024 à 08:53
+-- Généré le : jeu. 17 oct. 2024 à 09:26
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `caza familia`
 --
+CREATE DATABASE IF NOT EXISTS `caza familia` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `caza familia`;
 
 -- --------------------------------------------------------
 
