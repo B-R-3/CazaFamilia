@@ -1,5 +1,5 @@
 <?php
-
+// connexion base de donner cza familia
 function connexion()
 {
   $dsn = 'mysql:host=localhost;dbname=caza familia';

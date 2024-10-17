@@ -31,17 +31,20 @@ if ($submit) {
                 $_SESSION['login'] = $user['login']; // Stocke le login dans la session
                 header("Location: Liste.php"); // Redirige vers une autre page
                 exit();
+            // si mot de passe ou ogin inconnu dans la base
             } else {
                 $message = "Login et/ou mot de passe invalide";
             }
+        // si erreur dans le requete sql
         } catch (PDOException $ex) {
             die("Erreur lors de la requête SQL : " . $ex->getMessage());
         }
+    // si la personne n'a pas remplie les deux champs
     } else {
         $message = "Veuillez remplir tous les champs";
     }
 }
-
+// redirection vers l'index
 if ($annuler) {
     header("Location: index.php");
 }
@@ -68,6 +71,7 @@ if ($annuler) {
         <?php require_once "menu.php"; ?>
 
         <div class="container">
+        <!-- creation du formulaire qui renvoie les resultats sur la meme page -->
             <form id="formulaire" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <div class="cont">
                     <h1>Connexion</h1>

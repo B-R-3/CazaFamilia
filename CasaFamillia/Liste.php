@@ -63,6 +63,7 @@ if (isset($_POST['submit'])) {
         }
 
         // Rediriger après insertion
+        // Récuêration de l'id_commande et type conso pour la page validation.php
         header("Location: validation.php?id_commande=" . $id_commande . "&type_conso=".$type_conso);
         exit();
     } catch (PDOException $e) {
@@ -104,6 +105,7 @@ if (isset($_POST['annuler'])) {
             </tr>
 
             <?php
+            // tableau de tous les produits avec un choix de qté 
             foreach ($rows as $row) {
                 echo '<tr><td>' . htmlspecialchars($row["libelle"]) . '</td>';
                 echo '<td>' . htmlspecialchars($row["prix_ht"]) . '€</td>';

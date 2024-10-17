@@ -1,9 +1,9 @@
 <?php
 include "fonction.inc.php";
 session_start();
-
+// connexion BDD
 $dbh = connexion();
-
+// selectionner toute la table produit
 $sql1 = 'select * from produit';
 try {
     $sth = $dbh->prepare($sql1);
@@ -52,33 +52,13 @@ try {
                 <th>Prix</th>
             </tr>
         <?php
+        // Affichage tableau des produit avec leurs prix hors taxe
         foreach ($rows as $row){
             echo "<tr><td>".$row["libelle"]."</td>";
             echo "<td>".$row["prix_ht"]."€</td></tr>";
             ;
 
         }
-           /*<tr>
-                <th>Plats</th>
-                <th>Prix</th>
-                <th>Quantité disponible</th>
-            </tr>
-            <tr>
-                <td>Pizza margharita</td>
-                <td>15e</td>
-                <td>12</td>
-            </tr>
-            <tr>
-                <td>Lasagne</td>
-                <td>12e</td>
-                <td>13</td>
-            </tr>
-            <tr>
-                <td>Tiramisu</td>
-                <td>5e</td>
-                <td>20</td>
-
-            </tr>*/
            ?>
         </table>
     </div>

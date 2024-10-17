@@ -3,6 +3,7 @@ include "fonction.inc.php";
 session_start();
 
 $dbh = connexion();
+// si pas de session alors renvoie sur index
 if (!isset($_SESSION['id_user'])) {
     header("Location: index.php");
     exit();
