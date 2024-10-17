@@ -15,9 +15,9 @@ if (!isset($_SESSION['id_user'])) {
 $id_user = $_SESSION['id_user'];
 
 // Initialisation des variables
-
-$type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
 $id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
+$type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
+
 $qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
 $produits_commande = array(); // Initialisation à un tableau vide
 $total_commande = 0; // Initialisation à 0
@@ -77,7 +77,8 @@ try {
     <h3>Total de la commande (HT) : <?php echo number_format($total_commande, 2); ?> €</h3>
 
     <p><a href="index.php">Retour à l'accueil</a></p>
-    <a href="payement.php">page de Paiement</a>
+    <p><a href="payement.php?id_commande=<?php echo $id_commande; ?>">Régler la commande</a></p>
+
 </body>
 
 </html>
