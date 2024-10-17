@@ -16,7 +16,8 @@ $id_user = $_SESSION['id_user'];
 
 // Initialisation des variables
 
-$type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
+$type_conso = isset($_GET["type_conso"]) ? $_GET["type_conso"] : '';
+$id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
 $qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
 $produits_commande = array(); // Initialisation à un tableau vide
 $total_commande = 0; // Initialisation à 0
@@ -24,15 +25,19 @@ $total_commande = 0; // Initialisation à 0
 // Récupérer les produits commandés de la base de données
 // Exemple : SELECT produit, prix_ht FROM produits WHERE id_user = :id_user
 // Simulation des produits (ceci doit être remplacé par votre logique réelle)
-$produits_commande = [
-    ['libelle' => 'Produit A', 'prix_ht' => 10.0, 'qte' => 2, 'total' => 20.0],
-    ['libelle' => 'Produit B', 'prix_ht' => 15.0, 'qte' => 1, 'total' => 15.0],
-];
-
-// Calcul du total de la commande
-foreach ($produits_commande as $produit) {
-    $total_commande += $produit['total'];
+$sql = 'SELECT p.libelle, p.prix_ht, l.qte  FROM lignecommande as l, produit as p where l.id_produit = p.id_produit and id_commande = :id_commande';
+try {
+    $sth = $dbh->prepare($sql);
+    $sth->execute(
+        array(
+            ":id_commande" => $id_commande
+        )
+    );
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $ex) {
+    die("Erreur lors de la requête SQL : " . $ex->getMessage());
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +63,13 @@ foreach ($produits_commande as $produit) {
             <th>Quantité</th>
             <th>Total (HT)</th>
         </tr>
-        <?php foreach ($produits_commande as $produit) : ?>
+        <?php foreach ($rows as $row) : ?>
             <tr>
-                <td><?php echo htmlspecialchars($produit['libelle']); ?></td>
-                <td><?php echo number_format($produit['prix_ht'], 2); ?> €</td>
-                <td><?php echo htmlspecialchars($produit['qte']); ?></td>
-                <td><?php echo number_format($produit['total'], 2); ?> €</td>
+                <td><?php echo htmlspecialchars($row['libelle']); ?></td>
+                <td><?php echo number_format($row['prix_ht'], 2); ?> €</td>
+                <td><?php echo htmlspecialchars($row['qte']); ?></td>
+                <!-- <td><?php //echo htmlspecialchars($row['prix']); 
+                            ?></td> -->
             </tr>
         <?php endforeach; ?>
     </table>

@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         );
 
         // récupérer l'ID de la dernière ligne insérée dans une table de la base de données.
-        $id_commande = $dbh->lastInsertId(); 
+        $id_commande = $dbh->lastInsertId();
 
         // Insertion dans la table lignecommande pour chaque produit commandé
         $sql1 = "INSERT INTO lignecommande(qte, id_produit, id_commande) VALUES (:qte, :id_produit, :id_commande)";
@@ -58,9 +58,8 @@ if (isset($_POST['submit'])) {
         }
 
         // Rediriger après insertion
-        header("Location: validation.php?id_commande=".$id_commande);
+        header("Location: validation.php?id_commande=" . $id_commande . "&type_conso=".$type_conso);
         exit();
-
     } catch (PDOException $e) {
         die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
     }
@@ -77,6 +76,7 @@ if (isset($_POST['annuler'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,9 +117,10 @@ if (isset($_POST['annuler'])) {
         <p>
             <input type="submit" name="submit" value="Valider">
             <input type="submit" name="annuler" value="Annuler">
-         <!-- <input type="hidden" name="form_submitted" value="1"> -->
+            <!-- <input type="hidden" name="form_submitted" value="1"> -->
 
         </p>
     </form>
 </body>
+
 </html>
