@@ -77,6 +77,7 @@ try {
     <h3>Total de la commande (HT) : <?php echo number_format($total_commande, 2); ?> €</h3>
 
     <p><a href="index.php">Retour à l'accueil</a></p>
+    <p><a href="payement.php?id_commande=<?php echo $id_commande; ?>">Régler la commande</a></p>
 </body>
 
 </html>
