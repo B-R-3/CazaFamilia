@@ -16,7 +16,7 @@ $id_user = $_SESSION['id_user'];
 
 // Initialisation des variables
 
-$type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
+$type_conso = isset($_GET["type_conso"]) ? $_GET["type_conso"] : '';
 $id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
 $qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
 $produits_commande = array(); // Initialisation à un tableau vide
