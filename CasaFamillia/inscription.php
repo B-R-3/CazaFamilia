@@ -5,6 +5,8 @@ session_start();
 // Connexion à la base de données
 $dbh = connexion();
 
+
+
 $message = "";
 // Récupère le contenu du formulaire
 $login = isset($_POST['login']) ? trim($_POST['login']) : '';

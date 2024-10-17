@@ -5,6 +5,11 @@ session_start();
 
 // Connexion à la base de données
 $dbh = connexion();
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['id_user'])) {
+    header("Location: index.php");
+    exit();
+}
 
 $type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
 $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
@@ -85,7 +90,7 @@ if (isset($_POST['annuler'])) {
 </head>
 
 <body>
-    <a href="index.php">Déconnexion</a>
+    <a href="deconnexion.php">Déconnexion</a>
 
     <h1>Liste des produits disponibles</h1>
     <br><br>

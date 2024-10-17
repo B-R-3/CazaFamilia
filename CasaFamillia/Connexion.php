@@ -3,6 +3,7 @@ include "fonction.inc.php";
 session_start();
 
 // Connexion à la base de données
+
 $dbh = connexion();
 
 

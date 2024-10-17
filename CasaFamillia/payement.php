@@ -3,6 +3,10 @@ include "fonction.inc.php";
 session_start();
 
 $dbh = connexion();
+if (!isset($_SESSION['id_user'])) {
+    header("Location: index.php");
+    exit();
+}
 
 
 

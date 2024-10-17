@@ -4,10 +4,10 @@ include "fonction.inc.php";
 
 // Connexion à la base de données
 $dbh = connexion();
-
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id_user'])) {
-    die("Erreur : Utilisateur non connecté.");
+    header("Location: index.php");
+    exit();
 }
 
 $id_user = $_SESSION['id_user'];
@@ -74,7 +74,7 @@ try {
 
     <h3>Total de la commande  : <?php echo number_format($row['total_commande'], 2); ?> €</h3>
 
-    <p><a href="index.php">Retour à l'accueil</a></p>
+    <p><a href="Liste.php">Retour à l'accueil</a></p>
     <p><a href="payement.php?id_commande=<?php echo $id_commande; ?>">Régler la commande</a></p>
 </body>
 
