@@ -61,7 +61,7 @@ try {
             <th>Produit</th>
             <th>Prix unitaire (HT)</th>
             <th>Quantité</th>
-            <th>Total (HT)</th>
+            <th>  Total  </th>
         </tr>
         <?php foreach ($rows as $row) : ?>
             <tr>
