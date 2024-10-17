@@ -28,7 +28,7 @@ if ($submit) {
                 // Mot de passe correct, connexion réussie
                 $_SESSION['id_user'] = $user['id_user']; // Stocke l'ID utilisateur dans la session
                 $_SESSION['login'] = $user['login']; // Stocke le login dans la session
-                header("Location: Liste.php"); // Redirige vers une autre page
+                header("Location: liste.php"); // Redirige vers une autre page
                 exit();
             } else {
                 $message = "Login et/ou mot de passe invalide";
@@ -58,14 +58,11 @@ if ($annuler) {
 <body>
     <nav>
         <div class="logo">
-            <h1><a href="index.php">CazaFamillia</a></h1>
         </div>
     </nav>
 
     <br>
     <div class="bigcontainer">
-        <?php require_once "menu.php"; ?>
-
         <div class="container">
             <form id="formulaire" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <div class="cont">

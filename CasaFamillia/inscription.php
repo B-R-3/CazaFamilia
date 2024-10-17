@@ -2,7 +2,7 @@
 include "fonction.inc.php";
 session_start();
 
-// Connexion à la base de données
+// connexion à la base de données
 $dbh = connexion();
 
 $message = "";
@@ -28,7 +28,7 @@ if ($submit) {
                 ':mot_de_passe' => $_hash,
                 ':email' => $email,
             ]);
-            header("Location: Index.php"); // Redirige après l'inscription
+            header("Location: index.php"); // Redirige après l'inscription
             exit();
         } catch (PDOException $ex) {
             die("Erreur lors de la requête SQL : " . $ex->getMessage());
@@ -44,18 +44,17 @@ if ($annuler) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Inscription</title>
 </head>
 <body>
 
 <h1>Inscription</h1>
-<?php
-require_once "menu.php";
-?>
+
 
 <form method="POST">
 

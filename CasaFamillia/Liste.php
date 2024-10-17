@@ -3,7 +3,7 @@ include "fonction.inc.php";
 session_start();
 
 
-// Connexion à la base de données
+// connexion à la base de données
 $dbh = connexion();
 
 $type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
@@ -81,13 +81,13 @@ if (isset($_POST['annuler'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Liste des produits</title>
+    <title>liste des produits</title>
 </head>
 
 <body>
     <a href="index.php">Déconnexion</a>
 
-    <h1>Liste des produits disponibles</h1>
+    <h1>liste des produits disponibles</h1>
     <br><br>
 
     <form id="formulaire" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">

@@ -4,7 +4,7 @@ include "fonction.inc.php";
 print_r($_SESSION);
 print_r($_GET);
 
-// Connexion à la base de données
+// connexion à la base de données
 $dbh = connexion();
 
 // Vérifier si l'utilisateur est connecté
