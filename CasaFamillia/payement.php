@@ -3,8 +3,7 @@ include "fonction.inc.php";
 session_start();
 
 $dbh = connexion();
-print_r($_SESSION);
-print_r($_GET);
+
 
 
 $id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
