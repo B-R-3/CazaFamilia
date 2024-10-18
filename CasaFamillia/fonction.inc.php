@@ -48,7 +48,7 @@ function afficherNav($liens)
 {
     echo "<nav>";
     echo '  <div class="logo">';
-    echo '    <img src="image/logo.png" alt="logo">';
+    echo '  <a href="index.php"><h1>CazaFamilia</h1></a>';
     echo '  </div>';
     echo '  <ul>';
     foreach ($liens as $texte => $url) {
@@ -62,6 +62,14 @@ function afficherNav($liens)
 switch ($current_page) {
     case 'index.php':
         $liens = [
+            'Menu' => 'menu.php',
+            'Connexion' => 'connexion.php',
+            'Inscription' => 'inscription.php'
+        ];
+        break;
+    case 'menu.php':
+        $liens = [
+            'Retour' => 'index.php',
             'Connexion' => 'connexion.php',
             'Inscription' => 'inscription.php'
         ];
@@ -78,7 +86,6 @@ switch ($current_page) {
             'Connexion' => 'connexion.php'
         ];
         break;
-
     default:
         $liens = [
             'Déconnexion' => 'deconnexion.php'
