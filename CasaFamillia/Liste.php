@@ -3,7 +3,7 @@ include "fonction.inc.php";
 session_start();
 
 
-// connexion à la base de données
+// Connexion à la base de données
 $dbh = connexion();
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id_user'])) {
@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
 
         // Rediriger après insertion
         // Récuêration de l'id_commande et type conso pour la page validation.php
-        header("Location: validation.php?id_commande=" . $id_commande . "&type_conso=" . $type_conso);
+        header("Location: validation.php?id_commande=" . $id_commande . "&type_conso=".$type_conso);
         exit();
     } catch (PDOException $e) {
         die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
@@ -87,53 +87,47 @@ if (isset($_POST['annuler'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>liste des produits</title>
+    <title>Liste des produits</title>
 </head>
 
 <body>
+    <a href="deconnexion.php">Déconnexion</a>
 
+    <h1>Liste des produits disponibles</h1>
+    <br><br>
 
-    <div class="bigcontainer qte">
-        <div class="suite">
-            <form id="formulaire" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <form id="formulaire" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <table>
+            <tr>
+                <th>Plat</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+            </tr>
 
-                <h1>Liste des produits disponibles</h1>
-                <div class="liste">
-                    <table>
-                        <tr>
-                            <th>Plat</th>
-                            <th>Prix</th>
-                            <th>Quantité</th>
-                        </tr>
+            <?php
+            // tableau de tous les produits avec un choix de qté 
+            foreach ($rows as $row) {
+                echo '<tr><td>' . htmlspecialchars($row["libelle"]) . '</td>';
+                echo '<td>' . htmlspecialchars($row["prix_ht"]) . '€</td>';
+                echo '<td><input type="number" name="qte[' . $row["id_produit"] . ']" min="0" max="20" placeholder="0"></td></tr>';
+            }
+            ?>
+        </table>
 
-                        <?php
-                        // tableau de tous les produits avec un choix de qté 
-                        foreach ($rows as $row) {
-                            echo '<tr><td>' . htmlspecialchars($row["libelle"]) . '</td>';
-                            echo '<td>' . htmlspecialchars($row["prix_ht"]) . '€</td>';
-                            echo '<td><input type="number" name="qte[' . $row["id_produit"] . ']" min="0" max="20" placeholder="0"></td></tr>';
-                        }
-                        ?>
-                    </table>
-                </div>
+        <!-- Boutons radio pour le type de consommation -->
+        <p>
+            <input type="radio" name="type_conso" value="1" required> À emporter
+            <input type="radio" name="type_conso" value="0" required> Sur place
+        </p>
 
-                <!-- Boutons radio pour le type de consommation -->
-                <p>
-                    <input type="radio" name="type_conso" value="1" required> À emporter
-                    <input type="radio" name="type_conso" value="0" required> Sur place
-                </p>
+        <!-- Boutons de soumission -->
+        <p>
+            <input type="submit" name="submit" value="Valider">
+            <input type="submit" name="annuler" value="Annuler">
+            <!-- <input type="hidden" name="form_submitted" value="1"> -->
 
-                <!-- Boutons de soumission -->
-                <div class="conso">
-                    <input type="submit" name="submit" value="Valider" class="wave-button">
-                    <input type="submit" name="annuler" value="Annuler" class="wave-button">
-                    <!-- <input type="hidden" name="form_submitted" value="1"> -->
-                </div>
-            </form>
-
-        </div>
-    </div>
-
+        </p>
+    </form>
 </body>
 
 </html>
