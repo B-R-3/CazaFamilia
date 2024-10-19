@@ -2,6 +2,7 @@
 include "fonction.inc.php";
 session_start();
 
+print_r($_GET);
 $dbh = connexion();
 // si pas de session alors renvoie sur index
 if (!isset($_SESSION['id_user'])) {
@@ -9,12 +10,16 @@ if (!isset($_SESSION['id_user'])) {
     exit();
 }
 
+if (isset($_POST['submit'])) {
+    header("Location: confirmation.php");
+}
 
 
 $id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
 //$id_commande= 1;
 // Récupérer le login de l'utilisateur depuis la session ou toute autre source
 $login = $_SESSION['login']; // Assurez-vous que le login est stocké dans la session
+$total_commande = isset($_GET["total_commande"]) ? $_GET["total_commande"] : '';
 
 // Récupérer l'id_user en fonction du login
 $sql_user = 'SELECT id_user, login FROM _user WHERE login = :login';
@@ -49,11 +54,12 @@ try {
     $sth->execute(array(':id_commande' => $id_commande));
     $commande = $sth->fetch(PDO::FETCH_ASSOC);
     
-    if ($commande) {
+    /*if ($commande) {
         $total_commande = $commande['total_commande'];
     } else {
         die("Aucune commande trouvée avec cet ID.");
     }
+    */
 } catch (PDOException $ex) {
     die("Erreur lors de la requête SQL pour commande : " . $ex->getMessage());
 }
@@ -74,7 +80,7 @@ try {
       
         
         <h2>Page de Paiement</h2>
-        <form action="traitement_paiement.php" method="POST">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
             <div class="form-group">
                 <label for="nom">Nom sur la carte</label>
                 <input type="text" id="nom" name="nom" required>
@@ -91,11 +97,9 @@ try {
                 <label for="cvv">CVV</label>
                 <input type="number" id="cvv" name="cvv" required>
             </div>
-            <input type="submit" value="Payer">
+            <input type="submit" name="submit" value="Payer">
         </form>
     </div>
     <a href="confirmation.php"><button>test de confirmation</button></a>
 </body>
 </html>
-payement.php
-Affichage de validation.php en cours...
