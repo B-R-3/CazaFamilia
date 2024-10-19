@@ -1,3 +1,7 @@
+<?php
+include "fonction.inc.php";
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

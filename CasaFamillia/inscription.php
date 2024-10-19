@@ -2,7 +2,7 @@
 include "fonction.inc.php";
 session_start();
 
-// Connexion à la base de données
+// connexion à la base de données
 $dbh = connexion();
 
 
@@ -20,7 +20,7 @@ if ($submit) {
     if (!empty($login) && !empty($mot_de_passe) && !empty($email)) {
         // Hachage du mot de passe
         $_hash = password_hash($mot_de_passe, PASSWORD_DEFAULT);
-        
+
         // Insertion dans la base de données
         $sql = "INSERT INTO _user (login, mot_de_passe, email) VALUES (:login, :mot_de_passe, :email)";
         try {
@@ -30,7 +30,7 @@ if ($submit) {
                 ':mot_de_passe' => $_hash,
                 ':email' => $email,
             ]);
-            header("Location: Index.php"); // Redirige après l'inscription
+            header("Location: index.php"); // Redirige après l'inscription
             exit();
         } catch (PDOException $ex) {
             die("Erreur lors de la requête SQL : " . $ex->getMessage());
@@ -46,33 +46,41 @@ if ($annuler) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
     <title>Inscription</title>
 </head>
+
 <body>
+    <div class="bigcontainer">
+        <div class="container">
 
-<h1>Inscription</h1>
-<?php
-require_once "menu.php";
-?>
-
-<form method="POST">
-
-<label for="login" >login</label><br>
-<input type="text" id="login" name="login" /><br>
+            <form method="POST">
+                <h1>Inscription</h1>
+                <label for="login"></label><br>
+                <input type="text" id="login" name="login" placeholder="Identifiant"/><br>
 
 
-<label for="mot_de_passe" >Mots de passe</label><br>
-<input type="password" id="mot_de_passe" name="mot_de_passe" required/><br>
+                <label for="mot_de_passe"></label><br>
+                <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" required /><br>
 
-<label for="email" >Email</label><br>
-<input type="text" id="email" name="email" required/><br><br>
+                <label for="email"></label><br>
+                <input type="text" id="email" name="email"  placeholder="ex@test.com" required /><br><br>
 
-<input type="submit" name="submit" value="valide"><br><br>
+                <input type="submit" name="submit" value="Valider" class="wave-button"><br><br>
 
+                <a href="connexion.php">
+                    <p>J'ai déja un compte</p>
+                </a>
 
+        </div>
+    </div>
 </body>
+
 </html>

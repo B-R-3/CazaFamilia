@@ -23,13 +23,13 @@ if ($submit) {
             $sth = $dbh->prepare($sql);
             $sth->execute([':login' => $login]);
             $user = $sth->fetch(PDO::FETCH_ASSOC); // Récupère l'utilisateur
-            
+
             // Vérification de l'utilisateur et du mot de passe
             if ($user && password_verify($mot_de_passe, $user['mot_de_passe'])) {
                 // Mot de passe correct, connexion réussie
                 $_SESSION['id_user'] = $user['id_user']; // Stocke l'ID utilisateur dans la session
                 $_SESSION['login'] = $user['login']; // Stocke le login dans la session
-                header("Location: Liste.php"); // Redirige vers une autre page
+                header("Location: liste.php"); // Redirige vers une autre page
                 exit();
             // si mot de passe ou ogin inconnu dans la base
             } else {
@@ -52,6 +52,7 @@ if ($annuler) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,32 +60,23 @@ if ($annuler) {
     <link rel="stylesheet" href="style.css">
     <title>CazaFamilia</title>
 </head>
-<body>
-    <nav>
-        <div class="logo">
-            <h1><a href="index.php">CazaFamillia</a></h1>
-        </div>
-    </nav>
 
+<body>
     <br>
     <div class="bigcontainer">
-        <?php require_once "menu.php"; ?>
-
         <div class="container">
         <!-- creation du formulaire qui renvoie les resultats sur la meme page -->
             <form id="formulaire" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                <div class="cont">
-                    <h1>Connexion</h1>
-                    <label for="login">Identifiant</label><br>
-                    <input type="text" id="login" name="login" placeholder="identifiant" required><br>
+                <h1>Connexion</h1>
+                <label for="login"></label><br>
+                <input type="text" id="login" name="login" placeholder="Identifiant" required><br>
 
-                    <label for="mot_de_passe">Mot de passe</label><br>
-                    <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="password" required><br><br><br>
+                <label for="mot_de_passe"></label><br>
+                <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" required><br><br><br>
 
-                    <div class="but-general">
-                        <input type="submit" name="submit" value="Connexion"/>
-                        <input type="submit" name="annuler" value="Annuler">
-                    </div>
+                <div class="but-general">
+                    <input type="submit" name="submit" value="Connexion" class="wave-button" />
+                    <input type="submit" name="annuler" value="Annuler" class="wave-button" />
                 </div>
             </form>
 
@@ -92,4 +84,5 @@ if ($annuler) {
         </div>
     </div>
 </body>
+
 </html>

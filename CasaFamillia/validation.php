@@ -2,7 +2,7 @@
 session_start();
 include "fonction.inc.php";
 
-// Connexion à la base de données
+// connexion à la base de données
 $dbh = connexion();
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id_user'])) {
