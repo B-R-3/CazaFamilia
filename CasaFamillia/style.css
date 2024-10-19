@@ -162,7 +162,8 @@ tfoot th {
     width: 80%;
     position: absolute;
 }
-.suite h1{
+
+.suite h1 {
     font-weight: lighter;
 }
 
@@ -187,7 +188,6 @@ tfoot th {
     background-size: cover;
     display: flex;
     justify-content: center;
-
 }
 
 .container {
@@ -204,12 +204,14 @@ tfoot th {
     font-weight: lighter;
 
 }
+
 .container a {
     font-family: "Italianno";
-    font-size:25px;
+    font-size: 25px;
     color: #fff;
 
 }
+
 .log {
     width: 25%;
     height: 10vh;
@@ -220,6 +222,7 @@ tfoot th {
     flex-direction: row;
     text-transform: uppercase;
 }
+
 /*-----button------*/
 .wave-button {
     width: 200px;
@@ -231,7 +234,7 @@ tfoot th {
     border: none;
     cursor: pointer;
     color: white;
-    
+
     letter-spacing: 2px;
     text-align: center;
     background: #444857;
@@ -260,14 +263,14 @@ tfoot th {
     width: 200px;
     height: 200px;
     background-color: #444857;
-    box-shadow: inset 0 0 50px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, .5);
     position: absolute;
     left: 0;
     top: -80px;
     transition: 0.4s;
 }
 
-.wave-button .wave::before, 
+.wave-button .wave::before,
 .wave-button .wave::after {
     width: 200%;
     height: 200%;
@@ -275,32 +278,50 @@ tfoot th {
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translate(-50%,-75%);
+    transform: translate(-50%, -75%);
 }
 
 .wave-button .wave::before {
     border-radius: 45%;
-    background-color: rgba(20,20,20,1);
+    background-color: rgba(20, 20, 20, 1);
     animation: wave 5s linear infinite;
 }
 
 .wave-button .wave::after {
     border-radius: 40%;
-    background-color: rgba(20,20,20,0.5);
+    background-color: rgba(20, 20, 20, 0.5);
     animation: wave 10s linear infinite;
 }
 
 @keyframes wave {
     0% {
-        transform: translate(-50%,-75%) rotate(0deg);
+        transform: translate(-50%, -75%) rotate(0deg);
     }
+
     100% {
-        transform: translate(-50%,-75%) rotate(360deg);
+        transform: translate(-50%, -75%) rotate(360deg);
     }
 }
+
 /*-----input------*/
-input[type=text], input[type=password]{
+input[type=text],
+input[type=password] {
     height: 25px;
     border: 2px solid rgb(78, 0, 0);
     border-radius: 5px;
-  }
+}
+
+p {
+    margin-top: 25px;
+    color: antiquewhite;
+    font-family: "Italianno";
+    font-size: 50px;
+}
+
+/*-----LISTE------*/
+.qte {
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.94)),
+        url(image/pizza_naples.jpg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
