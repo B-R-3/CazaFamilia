@@ -5,6 +5,11 @@ session_start();
 
 // connexion à la base de données
 $dbh = connexion();
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['id_user'])) {
+    header("Location: index.php");
+    exit();
+}
 
 $type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
 $id_user = isset($_POST['id_user']) ? $_POST['id_user'] : '';
@@ -58,7 +63,8 @@ if (isset($_POST['submit'])) {
         }
 
         // Rediriger après insertion
-        header("Location: validation.php?id_commande=" . $id_commande . "type_conso=".$type_conso);
+        // Récuêration de l'id_commande et type conso pour la page validation.php
+        header("Location: validation.php?id_commande=" . $id_commande . "&type_conso=".$type_conso);
         exit();
     } catch (PDOException $e) {
         die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
@@ -85,7 +91,7 @@ if (isset($_POST['annuler'])) {
 </head>
 
 <body>
-    <a href="index.php">Déconnexion</a>
+    <a href="deconnexion.php">Déconnexion</a>
 
     <h1>liste des produits disponibles</h1>
     <br><br>
@@ -99,6 +105,7 @@ if (isset($_POST['annuler'])) {
             </tr>
 
             <?php
+            // tableau de tous les produits avec un choix de qté 
             foreach ($rows as $row) {
                 echo '<tr><td>' . htmlspecialchars($row["libelle"]) . '</td>';
                 echo '<td>' . htmlspecialchars($row["prix_ht"]) . '€</td>';

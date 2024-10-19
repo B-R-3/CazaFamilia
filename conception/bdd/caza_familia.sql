@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 10 oct. 2024 à 08:45
+-- Généré le : jeu. 17 oct. 2024 à 09:26
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -58,6 +58,88 @@ CREATE TABLE `lignecommande` (
   `qte` int(11) NOT NULL,
   `total_ligne_ht` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déclencheurs `lignecommande`
+--
+DELIMITER $$
+CREATE TRIGGER `After_ligne_update` AFTER UPDATE ON `lignecommande` FOR EACH ROW BEGIN
+    DECLARE total_ht DECIMAL(10,2);
+    DECLARE taux_tva DECIMAL(4,3);
+
+    -- Calculer le total hors taxes pour toutes les lignes de la commande
+    SELECT SUM(total_ligne_ht) INTO total_ht
+    FROM lignecommande
+    WHERE id_commande = NEW.id_commande;
+
+    -- Vérifier si le taux réduit de 5,5% doit être appliqué
+    IF (SELECT type_conso FROM commande WHERE id_commande = NEW.id_commande) = 1 THEN
+        SET taux_tva = 0.055;  -- Taux réduit de 5,5%
+    ELSE IF (SELECT type_conso FROM commande WHERE id_commande = NEW.id_commande) = 0 THEN
+        SET taux_tva = 0.10;   -- Taux standard de 10%
+    END IF;
+END IF;
+
+
+    -- Mettre à jour le total de la commande et appliquer la TVA
+    UPDATE commande
+    SET total_commande = total_ht * (1 + taux_tva)
+    WHERE id_commande = NEW.id_commande;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `after_ligne_insert` AFTER INSERT ON `lignecommande` FOR EACH ROW BEGIN
+    DECLARE total_ht DECIMAL(10,2);
+    DECLARE taux_tva DECIMAL(4,3);  
+
+    -- Calculer le total HT pour la commande
+    SELECT SUM(total_ligne_ht) INTO total_ht
+    FROM lignecommande
+    WHERE id_commande = NEW.id_commande;
+
+IF (SELECT type_conso FROM commande WHERE id_commande = NEW.id_commande) = 1 THEN
+        SET taux_tva = 0.055;  -- Taux réduit de 5,5%
+    ELSE
+        SET taux_tva = 0.10;   -- Taux standard de 10%
+    END IF;
+
+
+    -- Mettre à jour le total TTC de la commande
+    UPDATE commande
+    SET total_commande = total_ht * (1 + taux_tva)
+    WHERE id_commande = NEW.id_commande;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `before_ligne_insert` BEFORE INSERT ON `lignecommande` FOR EACH ROW BEGIN
+    DECLARE prix_produit DECIMAL(10,2);
+
+    -- Récupérer le prix HT du produit
+    SELECT prix_ht INTO prix_produit
+    FROM produit
+    WHERE id_produit = NEW.id_produit;
+
+    -- Calculer le total HT pour la ligne
+    SET NEW.total_ligne_ht = NEW.qte * prix_produit;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `before_ligne_update` BEFORE UPDATE ON `lignecommande` FOR EACH ROW BEGIN
+    DECLARE prix_produit DECIMAL(10,2);
+
+    -- Récupérer le prix HT du produit
+    SELECT prix_ht INTO prix_produit
+    FROM produit
+    WHERE id_produit = NEW.id_produit;
+
+    -- Recalculer le total HT pour la ligne
+    SET NEW.total_ligne_ht = NEW.qte * prix_produit;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 

@@ -1,31 +1,31 @@
 <?php
 session_start();
 include "fonction.inc.php";
-print_r($_SESSION);
-print_r($_GET);
 
 // connexion à la base de données
 $dbh = connexion();
-
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['id_user'])) {
-    die("Erreur : Utilisateur non connecté.");
+    header("Location: index.php");
+    exit();
 }
 
 $id_user = $_SESSION['id_user'];
 
 // Initialisation des variables
 
-$type_conso = isset($_POST["type_conso"]) ? $_POST["type_conso"] : '';
+$type_conso = isset($_GET["type_conso"]) ? $_GET["type_conso"] : '';
 $id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
 $qte = isset($_POST['qte']) ? $_POST['qte'] : array(); // Capture les quantités
 $produits_commande = array(); // Initialisation à un tableau vide
 $total_commande = 0; // Initialisation à 0
+$total_ligne_ht = 0;
 
 // Récupérer les produits commandés de la base de données
 // Exemple : SELECT produit, prix_ht FROM produits WHERE id_user = :id_user
 // Simulation des produits (ceci doit être remplacé par votre logique réelle)
-$sql = 'SELECT p.libelle, p.prix_ht, l.qte  FROM lignecommande as l, produit as p where l.id_produit = p.id_produit and id_commande = :id_commande';
+// Selectionner le nom le prix la quantité et l'identifiant de la commande en fonction du numero de commande
+$sql = 'SELECT p.libelle, p.prix_ht, l.qte, c.total_commande FROM lignecommande AS l, produit AS p, commande AS c WHERE l.id_produit = p.id_produit AND l.id_commande = c.id_commande AND c.id_commande = :id_commande;';
 try {
     $sth = $dbh->prepare($sql);
     $sth->execute(
@@ -52,7 +52,7 @@ try {
 
 <body>
     <h1>Récapitulatif de la commande</h1>
-
+<!-- affichage du type (a emporter ou sur place) et la date de la commande -->
     <h2>Type de consommation : <?php echo htmlspecialchars($type_conso); ?></h2>
     <p>Date de la commande : <?php echo date("Y-m-d H:i:s"); ?></p>
 
@@ -61,22 +61,24 @@ try {
             <th>Produit</th>
             <th>Prix unitaire (HT)</th>
             <th>Quantité</th>
-            <th>Total (HT)</th>
+            <th>  Total  </th>
         </tr>
         <?php foreach ($rows as $row) : ?>
             <tr>
                 <td><?php echo htmlspecialchars($row['libelle']); ?></td>
                 <td><?php echo number_format($row['prix_ht'], 2); ?> €</td>
                 <td><?php echo htmlspecialchars($row['qte']); ?></td>
-                <!-- <td><?php //echo htmlspecialchars($row['prix']); 
-                            ?></td> -->
+                <!-- Calcule du prix entre le nombre de choix et le prix de chaque produit -->
+                <td><?php echo htmlspecialchars($row['prix_ht']*$row['qte']);?> € </td>
             </tr>
         <?php endforeach; ?>
     </table>
+            <!-- Affichage du total de la commande avec les taxes -->
+    <h3>Total de la commande  : <?php echo number_format($row['total_commande'], 2); ?> €</h3>
 
-    <h3>Total de la commande (HT) : <?php echo number_format($total_commande, 2); ?> €</h3>
-
-    <p><a href="index.php">Retour à l'accueil</a></p>
+    <p><a href="Liste.php">Retour à l'accueil</a></p>
+    <!-- récupération de l'id_commande pour la page payemet -->
+    <p><a href="payement.php?id_commande=<?php echo $id_commande; ?>">Régler la commande</a></p>
 </body>
 
 </html>

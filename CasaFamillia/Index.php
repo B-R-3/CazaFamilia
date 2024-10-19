@@ -1,9 +1,9 @@
 <?php
 include "fonction.inc.php";
 session_start();
-
+// connexion BDD
 $dbh = connexion();
-
+// selectionner toute la table produit
 $sql1 = 'select * from produit';
 try {
     $sth = $dbh->prepare($sql1);
@@ -46,10 +46,6 @@ try {
 
 Duis id vehicula nisl. Aliquam vit.</p>
     </div>
-
-
-
-
 </body>
 
 </html>
