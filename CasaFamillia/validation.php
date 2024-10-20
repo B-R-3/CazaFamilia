@@ -106,11 +106,7 @@ try {
                 <!-- <p><a href="payement.php?id_commande=<?php echo $id_commande; ?>">Régler la commande</a></p> -->
             </div>
             <div class="conso">
-                   <p>
-<a href="payement.php?id_commande=<?php echo $id_commande; ?>&total_commande=<?php echo $row['total_commande']; ?>">
-        Régler la commande
-    </a>
-</p>
+                <a href="payement.php"><input type="submit" name="submit" value="Payer" class="wave-button"></a>
             </div>
         </div>
     </div>
