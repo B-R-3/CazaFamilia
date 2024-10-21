@@ -2,104 +2,126 @@
 include "fonction.inc.php";
 session_start();
 
-print_r($_GET);
+// Connexion à la base de données
 $dbh = connexion();
-// si pas de session alors renvoie sur index
+
+// Redirection si l'utilisateur n'est pas connecté
 if (!isset($_SESSION['id_user'])) {
     header("Location: index.php");
     exit();
 }
 
+// Vérification du formulaire soumis
 if (isset($_POST['submit'])) {
     header("Location: confirmation.php");
+    exit();
 }
 
-
+// Vérifier l'ID de commande, utiliser 1 par défaut si absent (pour tester)
 $id_commande = isset($_GET["id_commande"]) ? $_GET["id_commande"] : '';
-//$id_commande= 1;
-// Récupérer le login de l'utilisateur depuis la session ou toute autre source
-$login = $_SESSION['login']; // Assurez-vous que le login est stocké dans la session
-$total_commande = isset($_GET["total_commande"]) ? $_GET["total_commande"] : '';
+$login = $_SESSION['login']; // Login de l'utilisateur
 
-// Récupérer l'id_user en fonction du login
+// Récupérer l'utilisateur depuis le login
 $sql_user = 'SELECT id_user, login FROM _user WHERE login = :login';
 try {
     $sth = $dbh->prepare($sql_user);
-    $sth->execute(array(':login' => $login));
+    $sth->execute([':login' => $login]);
     $user = $sth->fetch(PDO::FETCH_ASSOC);
-    
-    if ($user) {
-        $login = $user['login'];
-    } else {
+
+    if (!$user) {
         die("Aucun utilisateur trouvé avec ce login.");
     }
 } catch (PDOException $ex) {
     die("Erreur lors de la requête SQL pour _user : " . $ex->getMessage());
 }
 
-// Requête pour récupérer les détails de la commande
-$sql_lignecommande = 'SELECT * FROM lignecommande WHERE id_commande = :id_commande';
-try {
-    $sth = $dbh->prepare($sql_lignecommande);
-    $sth->execute(array(':id_commande' => $id_commande));
-    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $ex) {
-    die("Erreur lors de la requête SQL pour lignecommande : " . $ex->getMessage());
-}
-
-// Requête pour récupérer le total de la commande
+// Récupérer le total de la commande
 $sql_commande = 'SELECT total_commande FROM commande WHERE id_commande = :id_commande';
 try {
     $sth = $dbh->prepare($sql_commande);
-    $sth->execute(array(':id_commande' => $id_commande));
+    $sth->execute([':id_commande' => $id_commande]);
     $commande = $sth->fetch(PDO::FETCH_ASSOC);
-    
-    /*if ($commande) {
+
+    if ($commande) {
         $total_commande = $commande['total_commande'];
     } else {
-        die("Aucune commande trouvée avec cet ID.");
+        die("Erreur : Commande introuvable avec l'ID $id_commande.");
     }
-    */
 } catch (PDOException $ex) {
     die("Erreur lors de la requête SQL pour commande : " . $ex->getMessage());
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de Paiement</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Page de démonstration de paiement par Craftyx">
+    <meta name="author" content="Craftyx">
+    <title>Page de démonstration de paiement par Craftyx</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
+
 <body>
-    <a href="index.php"><button>Retour à l'accueil</button></a>
+    <p>Voici la commande de <strong><?php echo htmlspecialchars($login); ?></strong></p>
     <div class="container">
-        <!-- Affichage du numéro de commande, du prix total et de l'id_user -->
-        <p>Voici la commande de <?php echo htmlspecialchars($login); ?></p> | Prix de la commande :  <?php echo htmlspecialchars($total_commande); ?> €</p>
-      
-        
-        <h2>Page de Paiement</h2>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-            <div class="form-group">
-                <label for="nom">Nom sur la carte</label>
-                <input type="text" id="nom" name="nom" required>
+        <div class='row'>
+            <div class='col-md-4 col-md-offset-4'>
+                <form accept-charset="UTF-8" action="/pay" id="payment-form" method="post">
+                    <div class='form-row'>
+                        <div class='col-xs-12 form-group'>
+                            <label class='control-label'>Nom sur la carte</label>
+                            <input class='form-control' size='4' type='text' name="name">
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class='col-xs-12 form-group card'>
+                            <label class='control-label'>Numéro de carte</label>
+                            <input autocomplete='off' class='form-control card-number' size='20' type='text' name="card_no">
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class='col-xs-4 form-group cvc'>
+                            <label class='control-label'>CVC</label>
+                            <input autocomplete='off' class='form-control card-cvc' placeholder='ex. 311' size='4' type='text' name="cvc">
+                        </div>
+                        <div class='col-xs-4 form-group expiration'>
+                            <label class='control-label'>Expiration</label>
+                            <input class='form-control card-expiry-month' placeholder='MM/AAAA' size='7' type='text' name="expiration_month">
+                        </div>
+                        <!-- <div class='col-xs-4 form-group expiration'>
+                            <label class='control-label'>Année </label>
+                            <input class='form-control card-expiry-year' placeholder='AAAA' size='4' type='text' name="expiration_year">
+                        </div> -->
+                    </div>
+
+                    <div class='form-row'>
+                        <div class='col-xs-12 form-group'>
+                            <label class='control-label'>Prix à payer: <?php echo number_format($total_commande, 2, ',', ' '); ?> €</label>
+                        </div>
+                    </div>
+
+                    <div class='form-row'>
+                        <div class='col-md-12 form-group'>
+                            <a href="confirmation.php"><button class='form-control btn btn-primary submit-button' type='submit'>Payer »</button></a>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="numero-carte">Numéro de Carte</label>
-                <input type="number" id="numero-carte" name="numero-carte" required>
-            </div>
-            <div class="form-group">
-                <label for="date-expiration">Date d'Expiration</label>
-                <input type="date" id="date-expiration" name="date-expiration" required>
-            </div>
-            <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="number" id="cvv" name="cvv" required>
-            </div>
-            <input type="submit" name="submit" value="Payer">
-        </form>
+        </div>
+
     </div>
-    <a href="confirmation.php"><button>test de confirmation</button></a>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
+
 </html>
