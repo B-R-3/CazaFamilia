@@ -50,6 +50,11 @@ try {
 } catch (PDOException $ex) {
     die("Erreur lors de la requête SQL pour commande : " . $ex->getMessage());
 }
+if (isset($_POST['submit'])){
+    header("Location: confirmation.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +79,7 @@ try {
     <div class="container">
         <div class='row'>
             <div class='col-md-4 col-md-offset-4'>
-                <form accept-charset="UTF-8" action="/pay" id="payment-form" method="post">
+                <form id="formulaire" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <div class='form-row'>
                         <div class='col-xs-12 form-group'>
                             <label class='control-label'>Nom sur la carte</label>
@@ -110,7 +115,7 @@ try {
 
                     <div class='form-row'>
                         <div class='col-md-12 form-group'>
-                            <a href="confirmation.php"><button class='form-control btn btn-primary submit-button' type='submit'>Payer »</button></a>
+                            <a href="confirmation.php"><input class='form-control btn btn-primary submit-button' type='submit' name="submit">Payer »</input></a>
                         </div>
                     </div>
                 </form>
