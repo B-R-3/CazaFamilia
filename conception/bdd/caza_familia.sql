@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 17 oct. 2024 à 09:26
+-- Généré le : jeu. 07 nov. 2024 à 11:31
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -20,8 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `caza familia`
 --
-CREATE DATABASE IF NOT EXISTS `caza familia` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `caza familia`;
+
+DELIMITER $$
+--
+-- Fonctions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `renvoie_somme_produit` (`idcom` INT) RETURNS INT(11)  BEGIN
+    DECLARE total_qte INT;
+    
+    -- Calcul de la somme des quantités pour une commande donnée
+    SELECT SUM(qte) INTO total_qte
+    FROM lignecommande
+    WHERE id_commande = idcom;
+    
+    -- Retourner la somme calculée
+    RETURN total_qte;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -162,7 +178,7 @@ INSERT INTO `produit` (`id_produit`, `libelle`, `prix_ht`, `quantité_produit`) 
 (1, 'Tomate Mozzarella Basilic ', 10.00, 15),
 (2, 'Carpaccio de bresaola au pesto', 12.00, 15),
 (3, 'Bruschetta Tomate Jambon', 12.00, 17),
-(4, 'Wrap à l\'italienne', 8.00, 18),
+(4, "Wrap à l'italienne", 8.00, 18),
 (5, 'Lasagnes bolognaise', 15.00, 20),
 (6, 'Cannelloni fromage/bolognaise', 14.00, 25),
 (7, 'Spaghetti Bolognaise/Carbonara', 14.00, 22),
