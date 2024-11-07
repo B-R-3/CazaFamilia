@@ -16,7 +16,7 @@ try {
     die("Erreur lors de la requête SQL : " . $ex->getMessage());
 } 
 
-foreach ($rows as &$row) {
+foreach ($rows as &$row) { // le & sert a pouvoir modifier le $row qui est en lecture seule
     $sql1 = "SELECT * FROM lignecommande WHERE id_commande = :id_commande";
     try {
         $sth = $dbh->prepare($sql1);

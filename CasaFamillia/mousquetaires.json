@@ -55,5 +55,29 @@
                 "total_ligne_ht": "42.00"
             }
         ]
+    },
+    {
+        "id_commande": 4,
+        "id_user": 2,
+        "id_etat": 0,
+        "_date": "2024-11-07 10:38:59",
+        "total_commande": "44.31",
+        "type_conso": 1,
+        "lignes": [
+            {
+                "id_ligne_commande": 5,
+                "id_commande": 4,
+                "id_produit": 1,
+                "qte": 3,
+                "total_ligne_ht": "30.00"
+            },
+            {
+                "id_ligne_commande": 6,
+                "id_commande": 4,
+                "id_produit": 12,
+                "qte": 2,
+                "total_ligne_ht": "12.00"
+            }
+        ]
     }
 ]
