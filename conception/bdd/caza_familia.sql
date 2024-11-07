@@ -19,12 +19,30 @@ SET time_zone = "+00:00";
 
 --
 -- Base de données : `caza familia`
+
+
 --
 CREATE DATABASE IF NOT EXISTS `caza familia` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `caza familia`;
 
 -- --------------------------------------------------------
+DELIMITER $$
+--
+-- Fonctions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `renvoie_somme_produit` (`idcom` INT) RETURNS INT(11) DETERMINISTIC BEGIN
+    DECLARE total_qte INT;
+    
+    -- Calcul de la somme des quantités pour une commande donnée
+    SELECT SUM(qte) INTO total_qte
+    FROM lignecommande
+    WHERE id_commande = idcom;
+    
+    -- Retourner la somme calculée
+    RETURN total_qte;
+END$$
 
+DELIMITER ;
 --
 -- Structure de la table `commande`
 --
