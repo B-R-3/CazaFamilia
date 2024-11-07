@@ -7,7 +7,7 @@ session_start();
 // connexion à la base de données
 $dbh = connexion();
 
-$sql = "SELECT c.* FROM commande c ";
+$sql = "SELECT c.*,renvoie_somme_produit(c.id_commande) as Nb_produit FROM commande c";
 try {
     $sth = $dbh->prepare($sql);
     $sth->execute();
