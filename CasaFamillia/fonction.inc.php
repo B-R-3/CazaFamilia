@@ -1,7 +1,7 @@
 <?php
 function connexion()
 {
-    $dsn = 'mysql:host=localhost;dbname=caza familia';
+    $dsn = 'mysql:host=localhost;dbname=caza_familia';
     $user = 'root';
     $password = '';
 
