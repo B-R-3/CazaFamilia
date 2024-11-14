@@ -7,7 +7,7 @@ session_start();
 // connexion à la base de données
 $dbh = connexion();
 
-$sql = "SELECT c.* FROM commande c ";
+$sql = "SELECT c.*,renvoie_somme_produit(id_commande) as total_nb_produit FROM commande c ";
 try {
     $sth = $dbh->prepare($sql);
     $sth->execute();
@@ -35,7 +35,7 @@ foreach ($rows as &$row) { // le & sert a pouvoir modifier le $row qui est en le
 
 // Envoi du contenu au format JSON
 $json = json_encode($rows,JSON_PRETTY_PRINT);
-file_put_contents("mousquetaires.json",$json);
+file_put_contents("commandes.json",$json);
  // Renvoie à la page d'accueil car rien ne s'affiche dans le navigateur
 
 
