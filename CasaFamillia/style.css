@@ -145,7 +145,13 @@ tbody td {
 tfoot th {
     text-align: right;
 }
-
+.align-left {
+    padding-left: 10%;
+    text-align: left;
+}
+.sylvain{
+    width: 5%;
+}
 /*------------------------------------*/
 .space {
     height: 100vh;
@@ -326,6 +332,6 @@ p {
     background-size: cover;
 }
 
-/*-----payement-------!!!*/
+/*-----confirmation-------!!!*/
 
 
