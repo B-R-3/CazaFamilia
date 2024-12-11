@@ -26,13 +26,14 @@ MySQL : Pour le stockage des données des utilisateurs, des commandes et des pro
 JavaScript : Pour améliorer l’interactivité du site.
 
 ## Installation et utilisation
-Clonez ce repository sur votre machine locale :
-bash
-Copier le code
-git clone https://github.com/votre-repository/cazafamilia.git
-Installez un serveur local comme XAMPP ou WAMP, puis placez les fichiers du projet dans le répertoire htdocs.
-Importez la base de données fournie dans le dossier conception/bdd.
-Ouvrez votre navigateur et accédez à localhost/cazafamilia.
+- Utilisez la commande suivante dans le terminal de VSC pour copier le projet :
+   ```
+   git clone https://github.com/votre-repository/cazafamilia.git
+  ```
+- Installez un serveur local comme XAMPP ou WAMP, puis placez les fichiers du projet dans le répertoire htdocs.
+- Importez la base de données fournie dans le dossier
+###### https://github.com/B-R-3/CazaFamilia/blob/main/conception/bdd/caza_familia.sql.
+- Ouvrez votre navigateur et accédez à localhost/cazafamilia.
 
 ## Membres du projet
 Ce projet a été réalisé par une équipe de développeurs passionnés :
