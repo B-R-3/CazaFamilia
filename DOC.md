@@ -1,5 +1,6 @@
 # Documents de conception 
-#### https://github.com/B-R-3/CazaFamilia/tree/main/conception
+#### Tous les document lié a la conception du site web CasaFamilia ce situe dans un dossier conception. 
+##### https://github.com/B-R-3/CazaFamilia/tree/main/conception
 
 ## Le diagramme des cas d'utilisation
 ##### https://github.com/B-R-3/CazaFamilia/blob/main/conception/DCU_cazaFamilia.png
