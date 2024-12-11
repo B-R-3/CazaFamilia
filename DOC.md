@@ -2,6 +2,7 @@
 #### https://github.com/B-R-3/CazaFamilia/tree/main/conception
 
 ## Le diagramme des cas d'utilisation
+#### https://github.com/B-R-3/CazaFamilia/blob/main/conception/DCU_cazaFamilia.png
 
 ## Le modèle conceptuel des données (looping ou équivalent) 
 #### https://github.com/B-R-3/CazaFamilia/tree/main/conception/bdd
@@ -28,3 +29,4 @@
 #### https://github.com/B-R-3/CazaFamilia/blob/main/CasaFamillia/commandes.json
 
 # Documents de réalisation 
+#### https://github.com/B-R-3/CazaFamilia/blob/main/README.md
