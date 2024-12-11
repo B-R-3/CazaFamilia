@@ -10,7 +10,7 @@
 ## Le modèle logique des données (PHPMyAdmin ou équivalent) 
 ##### https://github.com/B-R-3/CazaFamilia/tree/main/conception/bdd
 
-## Le modèle physique des données (script(s) SQL) 
+## Le modèle des données (script(s) SQL) 
 ##### https://github.com/B-R-3/CazaFamilia/tree/main/conception/bdd
 
 ### les états des commandes
