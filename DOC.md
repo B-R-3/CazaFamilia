@@ -35,14 +35,14 @@ Le diagramme des cas d'utilisation décrit les principaux scénarios d'interacti
 ### Modèle conceptuel des données (MCD)
 Le modèle conceptuel des données présente les entités et leurs relations. Il est disponible sous forme d'image dans le répertoire suivant :
 
-[Modèle conceptuel des données](conception/bdd/mcd_bd.jpg)
+[Modèle conceptuel des données](conception/bdd/mcd_db.jpg)
 
 ---
 
 ### Modèle logique des données (MLD)
 Le modèle logique des données traduit le MCD en tables et relations SQL. Il est disponible dans le même répertoire que le MCD :
 
-[Modèle logique des données](conception/bdd/mld_bd.jpg)
+[Modèle logique des données](conception/bdd/mld_db.jpg)
 
 ---
 
