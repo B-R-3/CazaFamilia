@@ -97,15 +97,6 @@ Les informations sur ces états et types sont disponibles dans la table `command
 #### Fichier JSON principal :
 [Commande JSON](CasaFamillia/commandes.json)
 
-Exemple de structure JSON :
-```json
-{
-  "commandeId": "Identifiant unique de la commande",
-  "produits": ["Liste des produits commandés"],
-  "etat": "État actuel de la commande"
-}
-```
-
 #### Messages d'erreur possibles :
 | **Code HTTP** | **Message**                     | **Description**                           |
 |---------------|---------------------------------|-------------------------------------------|
