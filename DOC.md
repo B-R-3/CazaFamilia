@@ -35,14 +35,14 @@ Le diagramme des cas d'utilisation décrit les principaux scénarios d'interacti
 ### Modèle conceptuel des données (MCD)
 Le modèle conceptuel des données présente les entités et leurs relations. Il est disponible sous forme d'image dans le répertoire suivant :
 
-[Modèle conceptuel des données](conception/bdd/)
+[Modèle conceptuel des données](conception/bdd/mcd_bd.jpg)
 
 ---
 
 ### Modèle logique des données (MLD)
 Le modèle logique des données traduit le MCD en tables et relations SQL. Il est disponible dans le même répertoire que le MCD :
 
-[Modèle logique des données](conception/bdd/)
+[Modèle logique des données](conception/bdd/mld_bd.jpg)
 
 ---
 
@@ -137,8 +137,8 @@ Exemple de structure JSON :
 1. Utilisateurs pré-configurés :
    | **Utilisateur** | **Mot de passe** |
    |------------------|------------------|
-   | admin            | admin123         |
-   | client           | client123        |
+   | admin            | admin           |
+
 
 2. Données existantes :
    - Produits de test : disponibles dans le script SQL.
