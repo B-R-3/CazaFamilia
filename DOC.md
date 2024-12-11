@@ -95,7 +95,7 @@ Les informations sur ces états et types sont disponibles dans la table `command
 ### Maquette JSON et messages d'erreur
 
 #### Fichier JSON principal :
-[Commande JSON](conception/CasaFamillia/commandes.json)
+[Commande JSON](CasaFamillia/commandes.json)
 
 Exemple de structure JSON :
 ```json
