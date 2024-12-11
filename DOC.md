@@ -37,3 +37,37 @@
 
 # Documents de réalisation 
 ###### https://github.com/B-R-3/CazaFamilia/blob/main/README.md
+
+# Documents d'exploitation
+
+## Le manuel d'utilisation
+
+### Inscription 
+#### Afin de pouvoir s'inscrire sur le site web il faut : 
+##### - Creer un nom d'utilisateur unique.
+##### - Creer un mot de passe sécurisé et unique. 
+##### - Donner une adresse mail valide. 
+
+### Connexion 
+#### Afin de pouvoir ensuite se connecter sur le site web il faut : 
+##### - Rentrer son nom d'utilisateur créé juste avant. 
+##### - Rentrer son mot de passe associé au nom d'utilisateur
+#### Si les deux condition son validé par la BDD l'utilisateur peut acceder au contenu du site. 
+
+### Commande 
+#### Afin de pouvoir commander une multitude de produit l'utilisateur doit : 
+##### - selectionner les produits désirés
+##### - selectioner si la commande est a emporté ou sur place
+##### - Cliquer sur validé pour passer a l'étape suivante
+
+### Paiement 
+#### Après la création de la commande l'utilisateur passe par la phase de payement et doit :
+##### - confirmer sa commande
+##### - suivre les etapes afin de payer par carte bleu sa commande
+
+### API
+#### Une fois la commande créé et payer la commande est envoyer par api au restaurateur qui va :
+##### - verifier la commmande
+##### - valider ou refuser la commande recu 
+#### Une fois l'action du restaurateur effectué l'etat de la commande sera modifié et envoyé a l'utilisateur ayant passé la commande. 
+
