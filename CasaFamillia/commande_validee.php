@@ -1,5 +1,6 @@
 <?php
 
+include "fonction-db.php";
 include "fonction.inc.php";
 session_start();
 
@@ -14,7 +15,7 @@ try {
     $sth->execute(
         array(
             ":id_commande" => $id_commande,
-            ":id_etat" => 3,
+            ":id_etat" => 1,
         )
     );
 } catch (PDOException $ex) {

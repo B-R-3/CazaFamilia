@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "fonction-db.php";
 include "fonction.inc.php";
 
 // connexion à la base de données

@@ -1,11 +1,12 @@
 <?php
+include "fonction-db.php";
 include "fonction.inc.php";
 session_start();
 // connexion BDD
 $dbh = connexion();
 // selectionner toute la table produit
 if (isset($_SESSION['id_user'])) {
-    header("Location: Liste.php");
+    header("Location: liste.php");
 }
 
 $sql1 = 'select * from produit';

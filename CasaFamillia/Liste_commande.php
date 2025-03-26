@@ -1,6 +1,6 @@
 <?php
 
-include "fonction.inc.php";
+include "fonction-db.php";
 session_start();
 
 
@@ -28,14 +28,13 @@ foreach ($rows as &$row) { // le & sert a pouvoir modifier le $row qui est en le
         die("Erreur lors de la requête SQL : " . $ex->getMessage());
     }
     $row['lignes'] = $lignes;
-    echo "<pre>";
-    print_r($row);
-    echo "</pre>";
 }
 
 // Envoi du contenu au format JSON
 $json = json_encode($rows,JSON_PRETTY_PRINT);
-file_put_contents("commandes.json",$json);
+//file_put_contents("commandes.json",$json);
+header("Content-type: application/json; charset=utf-8");
+echo $json;
  // Renvoie à la page d'accueil car rien ne s'affiche dans le navigateur
 
 
